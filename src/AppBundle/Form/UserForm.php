@@ -16,7 +16,6 @@ class UserForm extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'label' => "Username",
-                'placeholder' => "Please enter your username"
             ])
             ->add('save', SubmitType::class, ['label' => 'Submit'])
             ->getForm();

@@ -28,12 +28,6 @@ class Message
      */
     private $message;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="time", type="datetime")
-     */
-    private $time;
 
     /**
      *
@@ -75,29 +69,7 @@ class Message
         return $this->message;
     }
 
-    /**
-     * Set time
-     *
-     * @param \DateTime $time
-     *
-     * @return Message
-     */
-    public function setTime($time)
-    {
-        $this->time = $time;
 
-        return $this;
-    }
-
-    /**
-     * Get time
-     *
-     * @return \DateTime
-     */
-    public function getTime()
-    {
-        return $this->time;
-    }
 
     /**
      * Set user

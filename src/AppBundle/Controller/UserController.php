@@ -13,22 +13,17 @@ use Symfony\Component\HttpFoundation\Request;
 class UserController extends Controller
 {
 
-    public function indexAction()
-    {
-
-    }
-
     /**
+     * @Route("/", name="home")
      * @param Request $request
      * @return Response
-     * @Route("/", name="homepage")
      *
      */
     public function addAction(Request $request)
     {
         $user = new User();
 
-        $em = $this->getDoctrine()->getManager();
+       // $em = $this->getDoctrine()->getManager();
 
         $form = $this->createForm(UserForm::class, $user);
 
@@ -40,10 +35,10 @@ class UserController extends Controller
 
             $em->flush();
 
-            return $this->redirectToRoute('list_messages');
+            return $this->redirectToRoute('message');
         }
 
-        return $this->render('AppBundle:User:index.html.twig', [
+        return $this->render('AppBundle:user:index.html.twig',[
             'form' => $form->createView(),
         ]);
 
