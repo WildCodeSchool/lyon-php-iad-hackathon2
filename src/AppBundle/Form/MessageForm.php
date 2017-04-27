@@ -14,11 +14,10 @@ class MessageForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('description', TextareaType::class, [
-                'label' => 'Description',
-                'placeholder' => 'Type your message',
+            ->add('message', TextareaType::class, [
+                'label' => 'Message',
                 'attr' => [
-                    'rows' => '10',
+                    'rows' => '2',
                 ]
             ])
             ->add('save', SubmitType::class, ['label' => 'Submit'])
