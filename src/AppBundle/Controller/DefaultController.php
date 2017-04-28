@@ -66,11 +66,11 @@ class DefaultController extends Controller
         $form = $this->createForm(MessageForm::class, $message);
 
         $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('AppBundle:User')
+            ->find($request->getSession()->get("user")->getId());
 
         if ($form->isSubmitted()){
-            $em = $this->getDoctrine()->getManager();
-            $user = $em->getRepository('AppBundle:User')
-                       ->find($request->getSession()->get("user")->getId());
             $message->setUser($user);
             $em->persist($message);
             $em->flush();
@@ -81,7 +81,23 @@ class DefaultController extends Controller
         return $this->render(':default:message.html.twig', array(
             'listMessages' => $listMessages,
             'form' => $form->createView(),
+            'userId' => $user->getId(),
             ));
+    }
+
+    /**
+     * @Route("/delete/{id}" , name="delete")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+
+    public function deleteAction($id)
+    {
+      $em = $this->getDoctrine()->getManager();
+      $message = $em->getRepository('AppBundle:message')->find($id);
+      $em->remove($message);
+      $em->flush();
+      return $this->redirectToRoute('message');
+
     }
 
 

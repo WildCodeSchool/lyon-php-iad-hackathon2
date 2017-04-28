@@ -10,6 +10,9 @@
                     <p>{{ message.message }}</p>
                     <p>{{ message.datetime|date('Y-m-d h:m:s') }}</p>
                     <p>{{ message.user.name }}</p>
+                    {% if message.user.id == userId %}
+                        <span class="delete-action"><a href="/delete/{{ message.id }}">Supprimer</a></span>
+                    {% endif %}
 
                 </li>
             {% endfor %}
@@ -21,4 +24,5 @@
         {{ form_widget(form) }}
         {{ form_end(form) }}
     </div>
+
 {% endblock %}
