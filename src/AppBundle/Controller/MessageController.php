@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Message;
+use AppBundle\Entity\User;
 use AppBundle\Form\MessageForm;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -21,36 +22,28 @@ class MessageController extends Controller
      */
     public function addAction(Request $request)
     {
-
-       $session = $request->getSession();
-       $name = $session->get('name');
-
-        $em = $this->getDoctrine()->getManager();
-
-        $messages = $em->getRepository('AppBundle:Message')->findAll();
-
         $message = new Message();
-
 
         $form = $this->createForm(MessageForm::class, $message);
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
 
             $em = $this->getDoctrine()->getManager();
-            $message->setUser()->getId();
-            $em->persist($message);
+            $user = $em->getRepository(User::class)
+                        ->find($request->getSession()->get('user')->getId());
 
+            $message->setUser($user);
+            $em->persist($message);
             $em->flush();
 
             return $this->redirectToRoute('message');
         }
-
+        $messages = $this->getDoctrine()->getRepository(Message::class)->findBy(array(), array('datetime' => 'desc'), 20, 0);
         return $this->render('AppBundle:message:index.html.twig', [
             'messages' => $messages,
-            'name' => $name,
-            'form' => $form->createView(),
+            'form' => $form->createView()
         ]);
     }
 }
