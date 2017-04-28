@@ -31,9 +31,12 @@ class Message
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="messages")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="messages", cascade={"persist"})
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
+
+
 
     /**
      * Get id
@@ -73,16 +76,14 @@ class Message
 
     /**
      * Set user
-     *
      * @param \AppBundle\Entity\User $user
-     *
      * @return Message
      */
     public function setUser(\AppBundle\Entity\User $user = null)
     {
         $this->user = $user;
-
         return $this;
+
     }
 
     /**
@@ -94,4 +95,8 @@ class Message
     {
         return $this->user;
     }
+
+
+
+
 }
