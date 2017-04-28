@@ -24,49 +24,15 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="user", type="string", length=255, unique=true)
+     * @ORM\Column(name="name", type="string", length=255, unique=true)
      */
-    private $user;
+    private $name;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\message", mappedBy="user")
      */
     private $messages;
 
-
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set user
-     *
-     * @param string $user
-     *
-     * @return User
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return string
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
     /**
      * Constructor
      */
@@ -76,13 +42,47 @@ class User
     }
 
     /**
-     * Add message
+     * Get id
      *
-     * @param \AppBundle\Entity\Message $message
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
      *
      * @return User
      */
-    public function addMessage(\AppBundle\Entity\Message $message)
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Add message
+     *
+     * @param \AppBundle\Entity\message $message
+     *
+     * @return User
+     */
+    public function addMessage(\AppBundle\Entity\message $message)
     {
         $this->messages[] = $message;
 
@@ -92,9 +92,9 @@ class User
     /**
      * Remove message
      *
-     * @param \AppBundle\Entity\Message $message
+     * @param \AppBundle\Entity\message $message
      */
-    public function removeMessage(\AppBundle\Entity\Message $message)
+    public function removeMessage(\AppBundle\Entity\message $message)
     {
         $this->messages->removeElement($message);
     }

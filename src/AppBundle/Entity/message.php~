@@ -5,7 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * message
+ * Message
  *
  * @ORM\Table(name="message")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\messageRepository")
@@ -31,10 +31,9 @@ class message
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="datetime", type="datetime")
+     * @ORM\Column(name="datetime", type="datetime", nullable=true)
      */
     private $datetime;
-
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="messages")
@@ -45,7 +44,7 @@ class message
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -99,5 +98,28 @@ class message
     {
         return $this->datetime;
     }
-}
 
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return message
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+}

@@ -31,10 +31,9 @@ class message
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="datetime", type="datetime")
+     * @ORM\Column(name="datetime", type="datetime", nullable=true)
      */
     private $datetime;
-
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="messages")
@@ -45,7 +44,7 @@ class message
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {

@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div>
+        <h1>Liste Messages</h1>
+        <ul>
+            {% for message in listMessages %}
+                <li>
+
+                    <p>{{ message.message }}</p>
+                    <p>{{ message.datetime|date('Y-m-d h:m:s') }}</p>
+                    <p>{{ message.user.name }}</p>
+
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div>
+    <h1>Message</h1>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
