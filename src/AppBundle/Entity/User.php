@@ -2,7 +2,9 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+
 
 
 /**
@@ -72,7 +74,7 @@ class User
      */
     public function __construct()
     {
-        $this->messages = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->messages = new ArrayCollection();
     }
 
     /**
@@ -82,7 +84,7 @@ class User
      *
      * @return User
      */
-    public function addMessage(\AppBundle\Entity\Message $message)
+    public function addMessage(Message $message)
     {
         $this->messages[] = $message;
 
@@ -94,7 +96,7 @@ class User
      *
      * @param \AppBundle\Entity\Message $message
      */
-    public function removeMessage(\AppBundle\Entity\Message $message)
+    public function removeMessage(Message $message)
     {
         $this->messages->removeElement($message);
     }
