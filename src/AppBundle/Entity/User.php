@@ -32,9 +32,17 @@ class User
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="Message", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Message", mappedBy="user")
      */
     private $messages;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->messages = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -69,13 +77,7 @@ class User
     {
         return $this->name;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->messages = new ArrayCollection();
-    }
+
 
     /**
      * Add message

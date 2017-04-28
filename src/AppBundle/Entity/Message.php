@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Message
@@ -28,11 +29,22 @@ class Message
      */
     private $message;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="datetime", type="datetime")
+     */
+    private $datetime;
+
+
+    public function __construct()
+    {
+        $this->datetime = new \Datetime();
+    }
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="messages", cascade={"persist"})
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="messages")
      */
     private $user;
 
@@ -72,6 +84,27 @@ class Message
         return $this->message;
     }
 
+    /**
+     * Set datetime
+     *
+     * @param \DateTime $datetime
+     *
+     * @return message
+     */
+    public function setDatetime($datetime)
+    {
+        $this->datetime = $datetime;
+        return $this;
+    }
+    /**
+     * Get datetime
+     *
+     * @return \DateTime
+     */
+    public function getDatetime()
+    {
+        return $this->datetime;
+    }
 
 
     /**

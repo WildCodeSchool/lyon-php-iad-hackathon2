@@ -8,8 +8,9 @@
 
                     {% for message in messages %}
                         <tr>
+                            <td>{{ message.user.name}}</td>
                             <td>{{ message.message}}</td>
-
+                            <td>{{ message.datetime|date('d-m-Y h:i:s') }}</td>
                         </tr>
                     {% endfor %}
                 </table>
